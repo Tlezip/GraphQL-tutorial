@@ -8,4 +8,4 @@ const helloSchema = buildSchema(
   `
 )
 
-export default helloSchema
+module.exports = helloSchema
