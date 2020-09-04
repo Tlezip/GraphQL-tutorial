@@ -18,6 +18,10 @@
   },
   "homepage": "https://github.com/Tlezip/GraphQL-tutorial#readme",
   "dependencies": {
-    "graphql": "^15.3.0"
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-graphql": "^0.11.0",
+    "graphql": "^15.3.0",
+    "mysql": "^2.18.1"
   }
 }
