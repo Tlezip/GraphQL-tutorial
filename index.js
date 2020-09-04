@@ -1,6 +1,6 @@
 const { graphql } = require('graphql')
 
 const helloSchema = require('./schema/hello')
-const database = require('./resolver')
+const resolver = require('./resolver')
 
-graphql(helloSchema, '{ hello }', database).then(response => console.log({ response }))
+graphql(helloSchema, '{ hello }', resolver).then(response => console.log({ response }))
