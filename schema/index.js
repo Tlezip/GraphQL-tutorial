@@ -11,7 +11,7 @@ const helloSchema = buildSchema(
 
     type Query {
       hello: String
-      users: [User]
+      users(limit: Int): [User]
       user(id: Int): User
     }
 

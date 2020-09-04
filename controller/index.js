@@ -35,7 +35,22 @@ const getUserById = async id => {
   return user
 }
 
+const getUserList = async limit => {
+  const sql = `
+    SELECT * FROM user
+    LIMIT ${limit || 5}
+  `
+  const users = await new Promise((resolve, reject) => {
+    databaeConnection.query(sql, (err, data) => {
+      if (err) reject([])
+      resolve(data)
+    })
+  })
+  return users
+}
+
 module.exports = {
   addUser,
-  getUserById
+  getUserById,
+  getUserList
 }
