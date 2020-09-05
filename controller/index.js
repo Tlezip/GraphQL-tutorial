@@ -1,51 +1,25 @@
-const databaeConnection = require('../database')
+const UserModel = require('../database/model/user')
 
-const addUser = ({ name, title, age }) => {
-  const sql = `
-    INSERT INTO user
-    (
-      name, title, age
-    )
-    VALUES
-    (
-      "${name}", "${title}", "${age}"
-    )
-  `
-  databaeConnection.query(sql, (err, data) => {
-    if (err) {
-      console.log('error', err)
-    }
-    console.log('success', data)
+const addUser = async({ name, title, age }) => {
+  const user = await UserModel.create({
+    name,
+    title,
+    age
   })
+  return user
 }
 
 const getUserById = async id => {
-  const sql = `
-    SELECT * FROM user WHERE id = "${id}"
-  `
-  const user = await new Promise((resolve, reject) => {
-    databaeConnection.query(sql, (err, data) => {
-      if (err) {
-        console.log('error', err)
-        reject({})
-      }
-      resolve(data.length > 0 ? data[0] : {})
-    })
+  const user = await UserModel.findOne({
+    where: {
+      id: id
+    }
   })
   return user
 }
 
 const getUserList = async limit => {
-  const sql = `
-    SELECT * FROM user
-    LIMIT ${limit || 5}
-  `
-  const users = await new Promise((resolve, reject) => {
-    databaeConnection.query(sql, (err, data) => {
-      if (err) reject([])
-      resolve(data)
-    })
-  })
+  const users = await UserModel.findAll({ limit })
   return users
 }
 
